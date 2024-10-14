@@ -1,0 +1,10 @@
+a {
+  text-decoration: none;
+  /* color: inherit;  */
+}
+.LSHight {
+  height: 90vh;
+}
+li {
+  list-style-type: none;
+}

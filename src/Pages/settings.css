@@ -1,0 +1,45 @@
+.save-btn {
+  background-color: #6B46C1;
+  border: none;
+}
+
+.save-btn:hover{
+  background-color: #553C9A;
+  color: white;
+}
+
+.apply-btn {
+  background-color: white !important;
+  color: #6B46C1 !important ;
+  border-color:#6B46C1 ;
+  
+}
+.apply-btn:hover {
+  background-color: #6B46C1 ;
+  color: white;
+}
+
+
+.light-theme {
+  background-color: #ffffff; 
+  color: #000000; 
+}
+
+.dark-theme {
+  background-color: #121212; 
+  color: #ffffff; 
+}
+
+.theme-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.theme-card .theme-img {
+  width: 100%;
+  height: 100%; 
+  
+}
+
+.theme-card.selected {
+  border: 2px solid #6B46C1; 
+}

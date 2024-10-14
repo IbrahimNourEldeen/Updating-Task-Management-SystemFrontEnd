@@ -1,0 +1,34 @@
+.main-about-sheet {
+  height: 92vh;
+  background-image: url(./About\ Image.jpg);
+  background-size: cover;
+  position: relative;
+}
+.main-about-sheet::after {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.bgBtns {
+  background-color: #6b71e0;
+}
+.mainColor {
+  color: #6b71e0;
+}
+
+.main-master {
+  background-image: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(176, 176, 176, 0.2) 100.2%
+    ),
+    url("./Pages/Images/img1.jpg");
+  height: 92vh;
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  background-size: cover;
+}

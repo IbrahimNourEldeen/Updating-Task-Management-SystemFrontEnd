@@ -1,0 +1,44 @@
+
+
+
+.back-button {
+    cursor: pointer;
+    color: black;
+  }
+  
+  
+  .badge {
+    background-color: #6B46C1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  
+  .custom-progress {
+    background-color: white;
+    border-radius: 5px;
+  }
+  
+  
+  
+  .task-finish-btn,
+  .update-btn {
+    background-color: #6B46C1;
+    border-color: #6B46C1;
+    color: white;
+  }
+  
+  .task-finish-btn:hover,
+  .update-btn:hover {
+    background-color: #553C9A;
+    color: white;
+    
+}
+.change-status-icon {
+    cursor: pointer;
+    color: #6B46C1;
+    vertical-align: middle; 
+  }
+
+  
