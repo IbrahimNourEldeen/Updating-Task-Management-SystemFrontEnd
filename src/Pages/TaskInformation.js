@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { Button, Container, Row, Col, Form, ProgressBar } from 'react-bootstrap';
 import { BsArrowLeft, BsPencil } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import './TaskInformation.css';
+import { useSelector } from 'react-redux';
 
 const TaskInformation = () => {
   const navigate = useNavigate();
-  
+  const { id } = useParams();
+
+  const [searchParams] = useSearchParams();
+  const MD = searchParams.get('md');
+
+  const Tasks = `${useSelector((state) => state.tasks)}.${MD}`;
+
   const [task, setTask] = useState({
     name: 'Design logo for company',
     category: 'Design',
@@ -62,7 +69,7 @@ const TaskInformation = () => {
       <Row className="mb-4">
         <Col>
           <div className="d-flex align-items-center">
-            <BsArrowLeft size={24} className="me-2 back-button" onClick={() => navigate('/my-tasks')} />
+            <BsArrowLeft size={24} className="me-2 back-button" onClick={() => navigate('/dashboard')} />
             <h2 className="heading">Task Information</h2>
           </div>
         </Col>
@@ -125,27 +132,6 @@ const TaskInformation = () => {
                   value={task.comments}
                   onChange={handleInputChange}
                   size="sm" 
-                />
-              </Col>
-            </Row>
-
-            <Row className="mb-3">
-              <Col md={1}>
-                <Form.Label>Progress</Form.Label>
-              </Col>
-              <Col md={11}>
-                <ProgressBar
-                  now={task.progress}
-                  label={`${task.progress}%`}
-                  variant="custom-progress"
-                />
-                <Form.Control
-                  type="range"
-                  name="progress"
-                  value={task.progress}
-                  onChange={handleProgressChange}
-                  className="mt-2"
-                  disabled={isFinished} 
                 />
               </Col>
             </Row>

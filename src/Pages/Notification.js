@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Container,
-  Row,
-  Col,
-  Card,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import { Button, Row, Col, Card } from "react-bootstrap";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./notification.css";
-import { useDispatch } from "react-redux";
-import { makeAnyServerRequest } from "../utils/authUtils";
-import { GETALLNOTIFICATION, DELNOTIFICATION, CONFIRMAITION } from "../urls";
-
+import { useDispatch, useSelector } from "react-redux";
+import { makeAnyServerRequest, makeSSERequest } from "../utils/authUtils";
+import {
+  GETALLNOTIFICATION,
+  DELNOTIFICATION,
+  CONFIRMAITION,
+  NOTIFICATIONSSE,
+  GETALLTEAMS,
+} from "../urls";
+import store from "../app/store";
 const Notification = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  console.log("component")
+  
   const [notifications, setNotifications] = useState([]);
   useEffect(() => {
-    const fetchTeamTasks = async () => {
+    const fetchNotifications = async () => {
       try {
         const nots = await makeAnyServerRequest(GETALLNOTIFICATION, "GET");
         console.log("notif>>>>>      ", nots.data);
@@ -30,7 +29,7 @@ const Notification = () => {
         console.error("Error fetching tasks:", error);
       }
     };
-    fetchTeamTasks();
+    fetchNotifications();
   }, []);
 
   const deleteNotification = async (id) => {
@@ -64,20 +63,64 @@ const Notification = () => {
       console.log(error);
     }
   };
-  const rejectNotification = async(id) => {
+  const rejectNotification = async (id) => {
     try {
-        await makeAnyServerRequest(CONFIRMAITION, "POST", {
-          addRequestNotificationID: id,
-          decidedResponse: "reject",
-        });
-        const updatedNotifications = notifications.filter(
-          (notification) => notification._id !== id
-        );
-        setNotifications(updatedNotifications);
-      } catch (error) {
-        console.log(error);
-      }
+      await makeAnyServerRequest(CONFIRMAITION, "POST", {
+        addRequestNotificationID: id,
+        decidedResponse: "reject",
+      });
+      const updatedNotifications = notifications.filter(
+        (notification) => notification._id !== id
+      );
+      setNotifications(updatedNotifications);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  //SSE
+
+  const accessToken = useSelector((state) => state.auth.accessToken);
+  useEffect(() => {
+    console.log("use effect")
+    let eventSource = new EventSource(
+      `${NOTIFICATIONSSE}?accessToken=${accessToken}`
+    );
+
+    eventSource.onerror = async (error) => {
+      await makeAnyServerRequest(GETALLTEAMS, "GET");
+    };
+      // eventSource.onmessage = (event) => {
+      //   const initialMessage = JSON.parse(event.data);
+      //   console.log("Initial Message from SSE:", initialMessage);
+      //   // You can handle this message if needed (e.g., show a banner)
+      // }
+
+    eventSource.addEventListener('insert', (event) => {
+      const newNotification = JSON.parse(event.data);
+      console.log(newNotification)
+      // setNotifications(notifications.push(newNotification))
+      // setNotifications(prev => [...prev, newNotification]);
+    });
+
+    //   eventSource.addEventListener('update', (event) => {
+    //     const updatedNotification = JSON.parse(event.data);
+    //     setNotifications(prev =>
+    //       prev.map(n => n._id === updatedNotification._id ? updatedNotification : n)
+    //     );
+    //   });
+
+    //   eventSource.addEventListener('delete', (event) => {
+    //     const deletedNotificationId = JSON.parse(event.data);
+    //     setNotifications(prev => prev.filter(n => n._id !== deletedNotificationId));
+    //   });
+
+      return () => {
+        eventSource.close(); // Close SSE connection on component unmount
+      };
+  }, []);
+
+  ///////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="container h-100 position-relative overflow-auto">

@@ -44,6 +44,11 @@ const Dashboard = () => {
     navigate(`/updateTasks?taskId=${id}&teamId=0&URL=UPDATETASK`);
   };
 
+
+  const taskInformation = (id) => {
+    navigate(`/taskinformation/${id}?md=task`);
+  };
+
   return (
     <div className="container h-100 position-relative overflow-auto">
       <CreateTask URL={ADDNEWTASK} />
@@ -155,7 +160,11 @@ const Dashboard = () => {
                 </div>
                 <div className="col text-center">{task.status}</div>
                 <div className="col text-center">
-                  <button className="btn btn-success fw-bold">Show Task</button>
+                  <button className="btn btn-success fw-bold"
+                  onClick={()=>{
+                    taskInformation(task._id)
+                  }}
+                  >Show Task</button>
                 </div>
                 <div className="col text-center">
                   <button className="btn btn-warning fw-bold"

@@ -78,7 +78,9 @@ const TeamDetails = () => {
     navigate(`/updateTasks?taskId=${taskId}&teamId=${id}&URL=UPDATETEAMTASK`);
   };
 
-
+  const taskInformation = (id) => {
+    navigate(`/taskinformation/${id}?md=teamTasks`);
+  };
 
   return (
     <div className="container h-100 position-relative overflow-auto">
@@ -169,7 +171,11 @@ const TeamDetails = () => {
                   </div>
                   <div className="col text-center">{task.status}</div>
                   <div className="col text-center">
-                    <button className="btn btn-success fw-bold">
+                    <button className="btn btn-success fw-bold"
+                    onClick={()=>{
+                      taskInformation(task._id)
+                    }}
+                    >
                       Show Task
                     </button>
                   </div>

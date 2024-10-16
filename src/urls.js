@@ -38,4 +38,4 @@ export const DELNOTIFICATION="https://task-management-system-server-lovat.vercel
 
 export const CONFIRMAITION="https://task-management-system-server-lovat.vercel.app/team/response/teamAddRequest"
 
-
+export const NOTIFICATIONSSE="https://task-management-system-server-lovat.vercel.app/notification/SSE"

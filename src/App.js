@@ -15,6 +15,7 @@ import Sidebar from "./Components/Sidebar";
 import TeamDetails from "./Pages/TeamDetails";
 import Notification from "./Pages/Notification";
 import UpdateTask from "./Pages/updateTask";
+import TaskInformation from "./Pages/TaskInformation";
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-teams" element={<MyTeams />} />
             <Route path="/my-teams/:id" element={<TeamDetails/>}/>
+            <Route path="/taskinformation/:id" element={<TaskInformation/>}/>
             <Route path="/updateTasks" element={<UpdateTask/>}/>
             <Route path="/settings" element={<Settings />} />
             <Route path="/notification" element={<Notification/>} />

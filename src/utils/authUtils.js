@@ -1,33 +1,34 @@
 import { logout } from "../features/auth/authSlice";
 import store from "../app/store";
-import { LOGOUTUSER, NEWACCESSTOKEN } from "../urls";
+import { GETALLTEAMS, LOGOUTUSER, NEWACCESSTOKEN } from "../urls";
 
 export const logoutUser = async (refreshToken) => {
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhh")
+  console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
   try {
     const response = await fetch(LOGOUTUSER, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({refreshToken}),
+      body: JSON.stringify({ refreshToken }),
     });
 
-    if (response.ok) {
-      store.dispatch(logout());
-      console.log("Logout successful");
-    } else {
-      console.error("Logout failed with status:", response.status);
-      return false;
-    }
+    store.dispatch(logout());
+    console.log("Logout successful");
+
+    // if (response.ok) {
+    // } else {
+    //   console.error("Logout failed with status:", response.status);
+    //   return false;
+    // }
   } catch (error) {
     console.error("Logout failed:", error);
-    return false;
+    return error;
   }
 };
 
 export const getNewAccessToken = async (refreshToken) => {
-  console.log("heeeeeeeeeeeeeeeeeyyyyyyyyyyy")
+  console.log("heeeeeeeeeeeeeeeeeyyyyyyyyyyy");
   try {
     const response = await fetch(NEWACCESSTOKEN, {
       method: "POST",
@@ -47,7 +48,6 @@ export const getNewAccessToken = async (refreshToken) => {
     console.error("Error fetching new access token:", error);
   }
 };
-
 
 export const makeAnyServerRequest = async (
   linkOfTheTaskYouWantFromBackend,
@@ -80,18 +80,18 @@ export const makeAnyServerRequest = async (
           requestBody
         );
       }
-    }else if(response.status===400){
+    } else if (response.status === 400) {
       const data = await response.json();
-      console.log("data errorrr",data.message)
-      return data
+      console.log("data errorrr", data.message);
+      return data;
     }
 
     const data = await response.json();
-    console.log(data)
+    // console.log(data);
     return data;
   } catch (error) {
-
     console.error("Error making server request:", error);
     return error;
   }
 };
+
