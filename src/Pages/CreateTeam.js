@@ -7,25 +7,37 @@ import { ADDNEWTEAM } from "../urls";
 
 const CreateTeam = () => {
   const dispatch = useDispatch();
+  
+  const [err,setError]=useState('')
 
   const exitClick = (e) => {
     e.preventDefault();
     const ele = document.querySelector(".team-main");
     ele.classList.replace("d-flex", "d-none");
+    setError("")
   };
 
   const [name, setTeamName] = useState("");
   const [description, setDescription] = useState("");
 
+  const [Loading, setLoading] = useState(false);
+
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true)
     const response=await makeAnyServerRequest(ADDNEWTEAM, "POST", {
       name,
       description
     });
-    console.log(response.data.createdTeam)
-    await dispatch(pushTeam(response.data.createdTeam))
-    await exitClick(e)
+    if(response.status==="SUCCESS"){
+      console.log(response.data.createdTeam)
+      dispatch(pushTeam(response.data.createdTeam))
+      exitClick(e)
+    }else {
+      console.log(response.message);
+      setError(response.message);
+    }
+    setLoading(false)
   };
 
   return (
@@ -70,11 +82,12 @@ const CreateTeam = () => {
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
         </div>
+        <p className="text-danger">{err}</p>
         <button
           type="submit"
           className="btn btn-success bgBtns text-white fs-5 rounded-pill px-4"
         >
-          Create Team
+          {Loading?"Creating ...":"Create Team"}
         </button>
       </form>
     </div>

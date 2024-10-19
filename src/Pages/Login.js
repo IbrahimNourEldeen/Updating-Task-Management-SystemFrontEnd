@@ -13,13 +13,45 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // State for validation errors
+  const [errors, setErrors] = useState({ email: "", password: "" });
+
   const { loading, error } = useSelector((state) => state.auth);
+  const Error=error;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = { email: "", password: "" };
+
+    // Email validation (simple regex for email format)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email.";
+      isValid = false;
+    }
+
+    // Password validation (must not be empty)
+    if (!password.trim()) {
+      newErrors.password = "Password is required.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleLoginEvent = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return; // Stop if validation fails
+    }
 
     dispatch(loginStart());
 
@@ -33,7 +65,6 @@ const Login = () => {
         data: { email, password },
       });
 
-      console.log(response.data.data);
       if (response.status === 200) {
         dispatch(
           loginSuccess({
@@ -51,6 +82,7 @@ const Login = () => {
       dispatch(loginFailure(error.response.data.message));
     }
   };
+
   return (
     <div>
       <div className="container LSHight">
@@ -65,6 +97,8 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <span className="text-danger">{errors.email}</span>
+
               <input
                 className="form-control mb-3 border-0 border-bottom border-dark bg-transparent"
                 type="password"
@@ -72,12 +106,15 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button className="form-control btn btn-success" type="submit">
+              <span className="text-danger">{errors.password}</span>
+
+              <button className="form-control btn btn-success" type="submit" disabled={loading}>
                 {loading ? "Logging in..." : "Login"}
               </button>
-              {error && (
+
+              {Error && (
                 <div className="alert alert-danger" role="alert">
-                  {error}
+                  {Error}
                 </div>
               )}
             </form>

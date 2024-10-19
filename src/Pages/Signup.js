@@ -12,10 +12,20 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  
+  // State for validation errors
+  const [errors, setErrors] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
+
   const { loading, error } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -23,8 +33,51 @@ const Signup = () => {
     });
   };
 
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = { fullName: "", username: "", email: "", password: "" };
+
+    // Full Name validation
+    if (!user.fullName.trim()) {
+      newErrors.fullName = "Full Name is required.";
+      isValid = false;
+    }
+
+    // Username validation
+    if (!user.username.trim()) {
+      newErrors.username = "Username is required.";
+      isValid = false;
+    }
+
+    // Email validation (simple regex for email format)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!user.email.trim()) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!emailRegex.test(user.email)) {
+      newErrors.email = "Please enter a valid email.";
+      isValid = false;
+    }
+
+    // Password validation (must be at least 6 characters long)
+    if (!user.password) {
+      newErrors.password = "Password is required.";
+      isValid = false;
+    } else if (user.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return; // If validation fails, stop form submission
+    }
 
     dispatch(loginStart());
 
@@ -37,7 +90,7 @@ const Signup = () => {
         },
         data: user,
       });
-      
+
       if (response.status === 200) {
         dispatch(
           loginSuccess({
@@ -47,13 +100,14 @@ const Signup = () => {
           })
         );
         navigate("/", { replace: true });
-      }else{
-        dispatch(loginFailure(response.data))
+      } else {
+        dispatch(loginFailure(response.data));
       }
     } catch (error) {
-      console.log(error.response)
-      if(error.response.data.status==="FAIL")
-      dispatch(loginFailure(error.response.data.message))
+      console.log(error.response);
+      if (error.response.data.status === "FAIL") {
+        dispatch(loginFailure(error.response.data.message));
+      }
     }
   };
 
@@ -72,6 +126,8 @@ const Signup = () => {
                 onChange={handleChange}
                 value={user.fullName}
               />
+              <span className="text-danger">{errors.fullName}</span>
+              
               <input
                 className="form-control mb-3 border-0 border-bottom border-dark bg-transparent"
                 type="text"
@@ -80,6 +136,8 @@ const Signup = () => {
                 onChange={handleChange}
                 value={user.username}
               />
+              <span className="text-danger">{errors.username}</span>
+
               <input
                 className="form-control mb-3 border-0 border-bottom border-dark bg-transparent"
                 type="email"
@@ -88,6 +146,8 @@ const Signup = () => {
                 onChange={handleChange}
                 value={user.email}
               />
+              <span className="text-danger">{errors.email}</span>
+
               <input
                 className="form-control mb-3 border-0 border-bottom border-dark bg-transparent"
                 type="password"
@@ -96,14 +156,16 @@ const Signup = () => {
                 onChange={handleChange}
                 value={user.password}
               />
-              <button className="form-control btn btn-success" type="submit">
-                Create Your Account
+              <span className="text-danger">{errors.password}</span>
+
+              <button className="form-control btn btn-success" type="submit" disabled={loading}>
+                {loading ? "Creating Account..." : "Create Your Account"}
               </button>
               <span className="text-danger">{error}</span>
             </form>
             <button
               className="mt-5 text-decoration-none btn fw-bold"
-              onClick={() => navigate("/login")}
+              onClick={() =>{ navigate("/login")}}
             >
               Login
             </button>

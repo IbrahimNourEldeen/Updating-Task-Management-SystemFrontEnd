@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AddTeams } from "../features/teams/teamSlice";
 import { makeAnyServerRequest } from "../utils/authUtils";
-import { GETALLTEAMS } from "../urls";
+import { DELETETEAM, GETALLTEAMS } from "../urls";
 
 const MyTeams = () => {
-  //to handle the apperance of create team popup
+  
   const handleTeam = async () => {
     const ele = document.querySelector(".team-main");
     ele.classList.replace("d-none", "d-flex");
   };
 
-  //save data from database
+  
   const dispatch = useDispatch();
   const Teams = useSelector((state) => state.teams).teams;
   useEffect(() => {
@@ -30,12 +30,23 @@ const MyTeams = () => {
     fetchTeams();
   }, []);
 
-  //go to spisific team
   const navigate = useNavigate();
   const handleNavigate = (id) => {
-    // console.log(Teams)
     navigate(`/my-teams/${id}`);
   };
+
+
+  const handleDelete=async(id)=>{
+    try {
+      await makeAnyServerRequest(DELETETEAM, "DELETE", { teamId: id });
+      let temp = Teams.filter(team => {
+        return team._id !== id;
+      });
+      dispatch(AddTeams(temp));
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="container h-100 position-relative overflow-auto">
@@ -80,7 +91,9 @@ const MyTeams = () => {
                   >
                     Show Team
                   </button>
-                  <button className="btn btn-danger fw-bold">
+                  <button className="btn btn-danger fw-bold"
+                  onClick={()=>handleDelete(team._id)}
+                  >
                     Delete Team
                   </button>
                 </div>

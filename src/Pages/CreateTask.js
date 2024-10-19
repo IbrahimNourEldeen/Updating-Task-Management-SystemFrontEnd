@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { makeAnyServerRequest } from "../utils/authUtils";
-import { ADDNEWTASK, ADDNEWTASKINTEAM} from "../urls";
+import { ADDNEWTASK, ADDNEWTASKINTEAM } from "../urls";
 import { useDispatch } from "react-redux";
 import { pushTask, pushTaskToTeam } from "../features/tasks/taskSlice";
-// import { pushTask, pushTaskToTeam } from "../features/tasks/taskSlice";
 
-const CreateTask = ({URL,teamID}) => {
-  const dispatch=useDispatch()
-  const exitClick = (e) => {
-    e.preventDefault();
-    const ele = document.querySelector(".main");
-    ele.classList.replace("d-flex", "d-none");
-    setError("")
-  };
+const CreateTask = ({ URL, teamID }) => {
+  const dispatch = useDispatch();
 
   const [taskName, setTaskName] = useState("");
   const [deadline, setDeadline] = useState("");
@@ -22,14 +15,53 @@ const CreateTask = ({URL,teamID}) => {
   const [category, setCategory] = useState("");
   const [comment, setComment] = useState("");
 
-  const [error,setError]=useState("");
   
-const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  const [errors, setErrors] = useState({});
+  const [error, setError] = useState("");
+  const [Loading, setLoading] = useState(false);
+
+  const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+
+  // Frontend validation
+  const validateForm = () => {
+    let formErrors = {};
+    let isValid = true;
+
+    if (!taskName.trim()) {
+      formErrors.taskName = "Task name is required.";
+      isValid = false;
+    }
+    if (!deadline) {
+      formErrors.deadline = "Deadline is required.";
+      isValid = false;
+    }
+    if (!notificationTimes || !notificationUnite) {
+      formErrors.notification = "Notification time and unit are required.";
+      isValid = false;
+    }
+    if (!priority) {
+      formErrors.priority = "Priority is required.";
+      isValid = false;
+    }
+    if (!category) {
+      formErrors.category = "Category is required.";
+      isValid = false;
+    }
+
+    setErrors(formErrors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try{
-      const response=await makeAnyServerRequest(URL, "POST", {
+    if (!validateForm()) {
+      return;
+    }
+    try {
+      setLoading(true)
+      const response = await makeAnyServerRequest(URL, "POST", {
         title: taskName,
         dueDate: deadline,
         reminderTimes: notificationTimes,
@@ -38,22 +70,31 @@ const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
         category,
         description: comment,
         taskTimeZone,
-        teamID
+        teamID,
       });
-      if(response.status==="FAIL"){
-        setError(response.message)
+
+      if (response.status === "FAIL") {
+        setError(response.message);
       }
-      if(URL===ADDNEWTASK){
-        dispatch(pushTask(response.data.createdTask))
+      if (URL === ADDNEWTASK) {
+        dispatch(pushTask(response.data.createdTask));
+      } else if (URL === ADDNEWTASKINTEAM) {
+        dispatch(pushTaskToTeam(response.data.createdTask));
       }
-      else if(URL===ADDNEWTASKINTEAM){
-        console.log("team task>>>>>>>>>       ",response)
-        dispatch(pushTaskToTeam(response.data.createdTask))
-      }
-      exitClick(e)
-    }catch(error){
-      console.log(error)
+      setLoading(false)
+
+      exitClick(e);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  const exitClick = (e) => {
+    e.preventDefault();
+    const ele = document.querySelector(".main");
+    ele.classList.replace("d-flex", "d-none");
+    setError("");
+    setErrors({})
   };
 
   return (
@@ -70,122 +111,135 @@ const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
           className="btn position-absolute end-0 top-0 pointer-event"
           onClick={exitClick}
         >
-          <i class="fa-solid fa-x fs-4"></i>
+          <i className="fa-solid fa-x fs-4"></i>
         </button>
+
         <div className="d-flex">
-          <i class="fa-solid fa-clipboard-list fs-4 my-auto"></i>
+          <i className="fa-solid fa-clipboard-list fs-4 my-auto"></i>
           <input
             type="text"
             className="form-control mx-2"
             placeholder="Name Of Task"
+            value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
           />
         </div>
+        {errors.taskName && <span className="text-danger">{errors.taskName}</span>}
 
-        <div className="d-flex my-4">
-          <i class="fa-solid fa-stopwatch fs-4"></i>
-          <label for="DL" className="mx-3">
+        <div className="d-flex my-3">
+          <i className="fa-solid fa-stopwatch fs-4"></i>
+          <label htmlFor="DL" className="mx-3">
             Deadline:
           </label>
           <input
             id="DL"
             className="form-control w-25"
             type="datetime-local"
+            value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
           />
         </div>
+        {errors.deadline && <span className="text-danger">{errors.deadline}</span>}
 
         <div className="d-flex">
-          <i class="fa-regular fa-bell fs-4"></i>
-          <label for="NFs" className="mx-3">
-            Notification:{" "}
+          <i className="fa-regular fa-bell fs-4"></i>
+          <label htmlFor="NFs" className="mx-3">
+            Notification:
           </label>
-
           <input
             id="NFs"
             type="number"
             className="form-control"
-            placeholder="Reminder number of unites"
+            placeholder="Reminder number of units"
+            value={notificationTimes}
             onChange={(e) => setNotificationTimes(e.target.value)}
           />
           <select
             className="form-select"
+            value={notificationUnite}
             onChange={(e) => setNotificationUnite(e.target.value)}
           >
-            <option value="" selected disabled>
+            <option value="" disabled>
               Time
             </option>
             <option value="minutes">Minutes</option>
             <option value="hours">Hours</option>
-            <option value="dayes">Dayes</option>
+            <option value="days">Days</option>
           </select>
         </div>
+        {errors.notification && (
+          <span className="text-danger">{errors.notification}</span>
+        )}
 
-        <div className="d-flex my-4">
-          <i class="fa-regular fa-flag fs-4"></i>
-          <label for="pr" className="mx-3">
-            Priority:{" "}
+        <div className="d-flex mt-3">
+          <i className="fa-regular fa-flag fs-4"></i>
+          <label htmlFor="pr" className="mx-3">
+            Priority:
           </label>
           <select
             id="pr"
             className="form-select w-25"
+            value={priority}
             onChange={(e) => setPriority(e.target.value)}
           >
-            <option selected disabled>
-              choose
+            <option value="" disabled>
+              Choose
             </option>
             <option value="high">HIGH</option>
             <option value="medium">MEDIUM</option>
             <option value="low">LOW</option>
           </select>
         </div>
+        {errors.priority && <span className="text-danger">{errors.priority}</span>}
 
-        <div className="d-flex my-4">
-          <i class="fa-solid fa-layer-group fs-4"></i>
-          <label for="cgy" className="mx-3">
-            Category:{" "}
+        <div className="d-flex mt-3">
+          <i className="fa-solid fa-layer-group fs-4"></i>
+          <label htmlFor="cgy" className="mx-3">
+            Category:
           </label>
           <select
             id="cgy"
             className="form-select w-25"
+            value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="" selected disabled>
-              choose category
+            <option value="" disabled>
+              Choose category
             </option>
-            <option value="work">
-              WORCK
-            </option>
+            <option value="work">WORK</option>
             <option value="personal">PERSONAL</option>
             <option value="study">STUDY</option>
             <option value="shopping">SHOPPING</option>
             <option value="fitness">FITNESS</option>
-            <option value="chores">LOW</option>
-            <option value="finance">CHORES</option>
+            <option value="chores">CHORES</option>
+            <option value="finance">FINANCE</option>
             <option value="social">SOCIAL</option>
             <option value="travel">TRAVEL</option>
           </select>
         </div>
+        {errors.category && <span className="text-danger">{errors.category}</span>}
 
-        <div className="my-4">
-          <label for="cnt" className="fs-3">
-            comment:{" "}
+        <div className="my-3">
+          <label htmlFor="cnt" className="fs-3">
+            Comment:
           </label>
           <textarea
             id="cnt"
             className="form-control"
-            placeholder="input text..."
+            placeholder="Input text..."
+            value={comment}
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
         </div>
+
         <p className="text-danger">{error}</p>
+
         <button
           type="submit"
           className="btn btn-success bgBtns text-white fs-5 rounded-pill px-4 d-block ms-auto"
         >
-          Create Task
+          {Loading?"Creating ...":"Create Task"}
         </button>
-        
       </form>
     </div>
   );

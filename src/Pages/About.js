@@ -1,5 +1,6 @@
 import React from "react";
 import Footer from "../Components/Footer";
+import TMImage from './Images/TM.png';
 const About = () => {
   return (
     <div>
@@ -17,7 +18,7 @@ const About = () => {
           <div className="row text-center">
             <h2 className="fs-1 fw-bold my-4">Introduction</h2>
             <div className="col-12 col-md-6">
-              <img src="" alt="image indecate the introduction" />
+              <img src={TMImage} className="card-img-top" alt="..." />
             </div>
             <div className="col-12 col-md-6 text-start">
               <h3 className="fw-bold ">Task master</h3>
@@ -37,92 +38,70 @@ const About = () => {
         <div className="container my-5">
           <h2 className="fs-1 fw-bold my-4 text-center">Meet Our Team</h2>
           <div className="row">
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
+            <div className="col-12 col-md-6 mt-4">
+              <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title">Abdelrahman Nabil</h5>
                   <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Student at Shoubra Faculty of Engineering, Benha University,
+                    and Full Stack developer
                   </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
+                  <a href="https://www.linkedin.com/in/abdelrahman-nabil-4869ab2a4/" className="me-3" target="_blank">
+                    <i className="fa-brands fa-linkedin fs-3"></i>
+                  </a>
+                  <a href="https://github.com/abdelrahman-nabil32"  target="_blank">
+                    <i class="fa-brands fa-github fs-3"></i>
                   </a>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
+            <div className="col-12 col-md-6 mt-4">
+              <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title">Ibrahim Nour Eldeen</h5>
                   <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Student at the Faculty of Science, Benha University, and
+                    Full Stack developer
                   </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
+                  <a href="https://www.linkedin.com/in/ibrahim-nour-eldeen-67232a2b7/" className="me-3"  target="_blank">
+                    <i className="fa-brands fa-linkedin fs-3"></i>
+                  </a>
+                  <a href="https://github.com/IbrahimNourEldeen"  target="_blank">
+                    <i class="fa-brands fa-github fs-3"></i>
                   </a>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
+            <div className="col-12 col-md-6 mt-4">
+              <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title">Nader Osama</h5>
                   <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Graduate of the Faculty of Computer Science and Artificial
+                    Intelligence, Benha University
                   </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
+                  <a href=".." className="me-3">
+                    <i className="fa-brands fa-linkedin fs-3"></i>
+                  </a>
+                  <a href="...">
+                    <i class="fa-brands fa-github fs-3"></i>
                   </a>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
+            <div className="col-12 col-md-6 mt-4">
+              <div className="card shadow">
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
+                  <h5 className="card-title">Ebrahim Abdelhalem</h5>
                   <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Student at the Faculty of Computer Science and Artificial
+                    Intelligence, zqaziq University
                   </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
+                  <a href=".." className="me-3">
+                    <i className="fa-brands fa-linkedin fs-3"></i>
                   </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 mt-4">
-              <div className="card">
-                <img src="..." className="card-img-top" alt="..." />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </p>
-                  <a href="#" className="btn btn-primary">
-                    Go somewhere
+                  <a href="...">
+                    <i class="fa-brands fa-github fs-3"></i>
                   </a>
                 </div>
               </div>
@@ -144,7 +123,7 @@ const About = () => {
           Get In Touch
         </button>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -14,6 +14,7 @@ const teamSlice=createSlice({
         pushTeam:(state,action)=>{
             state.teams.push(action.payload)
         },
+        
     }
 })
 export default teamSlice.reducer

@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import { useSelector } from "react-redux";
-import { MdOutlineNotifications } from "react-icons/md";
-import { FaRegUserCircle } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { GiFalconMoon } from "react-icons/gi";
+import { Badge } from "react-bootstrap";
+import { makeAnyServerRequest } from "../utils/authUtils";
+import { GETALLNOTIFICATION } from "../urls";
+import { setNotifications } from "../features/notifications/notificationsSlice";
 
 const Navigation = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  
+  const notifications = useSelector((state) => state.notifications.items);
+
+
+  const dispatch=useDispatch();
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const nots = await makeAnyServerRequest(GETALLNOTIFICATION, "GET");
+        console.log("notif>>>>>      ", nots.data);
+        dispatch(setNotifications(nots.data))
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchNotifications();
+  }, []);
+
   return (
     <>
       <Navbar
@@ -20,25 +38,25 @@ const Navigation = () => {
       >
         <Container>
           <Navbar.Brand as={NavLink} to="/" className="fw-bold">
-            <GiFalconMoon />
+            <GiFalconMoon style={{ color: '#6b71e0' }} className="me-2 fs-3" />
             TaskMaster
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             {isAuthenticated ? (
               <Nav className="ms-auto">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="form-control"
-                />
-                <span className="fs-4 mx-lg-3">
-                  <NavLink to="/notification"  className="text-dark fs-4">
-                  <MdOutlineNotifications />
+                <span className="fs-4 mx-lg-4 position-relative">
+                  <NavLink to="/notification" className="fs-4">
+                    <i className="fa-regular fa-bell mainColor"></i>
+                    { notifications?.length > 0 && (
+                      <Badge className="position-absolute top-0 start-100 translate-middle rounded-pill bg-danger" style={{fontSize:"15px",padding:"5px"}}> 
+                        {notifications.length}
+                      </Badge>
+                    )}
                   </NavLink>
                 </span>
-                <NavLink to="/account" className="text-dark fs-4">
-                  <FaRegUserCircle />
+                <NavLink to="/settings" className="fs-4">
+                  <i class="fa-solid fa-circle-user mainColor"></i>
                 </NavLink>
               </Nav>
             ) : (
@@ -55,7 +73,9 @@ const Navigation = () => {
               </Nav>
             )}
 
-            {isAuthenticated ? false : (
+            {isAuthenticated ? (
+              false
+            ) : (
               <Nav>
                 <NavLink
                   to="/signup"

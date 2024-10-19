@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="pt-5" style={{ backgroundColor: "#f7f7f7" }}>
         <div className="container text-center">
           <h2 className="fs-1 fw-bold my-5">
-            <GiFalconMoon />
+            <GiFalconMoon  style={{ color: '#6b71e0' }} className="me-2 fs-3" />
             Task Master
           </h2>
           <p className="fs-5 mb-2 fw-bold">Subscribe to our website</p>
@@ -24,10 +24,10 @@ const Footer = () => {
               <h3 className="fw-bold">Products</h3>
               <ul>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">Task Master</a>
                 </li>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">Task management</a>
                 </li>
               </ul>
             </div>
@@ -35,13 +35,13 @@ const Footer = () => {
               <h3 className="fw-bold">Resources</h3>
               <ul>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">w3schools</a>
                 </li>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">React document</a>
                 </li>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">Redux toolkit document</a>
                 </li>
               </ul>
             </div>
@@ -49,18 +49,18 @@ const Footer = () => {
               <h3 className="fw-bold">Company</h3>
               <ul>
                 <li>
-                  <a href="...">features</a>
+                  <a className='text-secondary fw-bold' href="#">Global Knowledge</a>
                 </li>
               </ul>
             </div>
           </div>
 
           <div className="d-flex justify-content-evenly">
-            <p>Copyright © 2023 - Company Name</p>
+            <p>Copyright © 2024 - DEPI team</p>
             <ul className="d-flex">
               <li className="me-3">
                 <a href="..">
-                  <i className="fa-brands fa-twitter"></i>
+                  <i className="fa-brands fa-twitter text-info "></i>
                 </a>
               </li>
               <li className="me-3">
@@ -75,7 +75,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="..">
-                  <i className="fa-brands fa-youtube"></i>
+                  <i className="fa-brands fa-youtube text-danger"></i>
                 </a>
               </li>
             </ul>

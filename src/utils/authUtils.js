@@ -5,7 +5,9 @@ import { GETALLTEAMS, LOGOUTUSER, NEWACCESSTOKEN } from "../urls";
 export const logoutUser = async (refreshToken) => {
   console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
   try {
-    const response = await fetch(LOGOUTUSER, {
+    store.dispatch(logout());
+    console.log("Logout successful");
+    const response =await fetch(LOGOUTUSER, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -13,8 +15,6 @@ export const logoutUser = async (refreshToken) => {
       body: JSON.stringify({ refreshToken }),
     });
 
-    store.dispatch(logout());
-    console.log("Logout successful");
 
     // if (response.ok) {
     // } else {

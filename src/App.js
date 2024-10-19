@@ -7,7 +7,6 @@ import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
 import MyTeams from "./Pages/MyTeams";
 import Settings from "./Pages/Settings";
-import Account from "./Pages/Account";
 import Signup from "./Pages/Signup";
 import Navigation from "./Components/Navbar";
 import { useSelector } from "react-redux";
@@ -37,7 +36,6 @@ function App() {
             <Route path="/updateTasks" element={<UpdateTask/>}/>
             <Route path="/settings" element={<Settings />} />
             <Route path="/notification" element={<Notification/>} />
-            <Route path="/account" element={<Account />} />
           </Route>
         )}
         <Route path="*" element={"Page Not Found"} />

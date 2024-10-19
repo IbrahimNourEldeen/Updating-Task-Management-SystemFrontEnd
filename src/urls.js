@@ -1,13 +1,12 @@
-export const LOGINUSER="https://task-management-system-server-lovat.vercel.app/login"
+export const LOGINUSER="https://slash-stormy-chamomile.glitch.me/login"
 
-export const SIGNUPUSER="https://task-management-system-server-lovat.vercel.app/register"
+export const SIGNUPUSER="https://slash-stormy-chamomile.glitch.me/register"
 
 export const LOGOUTUSER="https://task-management-system-server-lovat.vercel.app/logout"
 
 export const GETALLTASKS="https://task-management-system-server-lovat.vercel.app/task/show/allTasks?tasksOwner=user"
 
 export const GETALLTEAMTASKS="https://task-management-system-server-lovat.vercel.app/task/show/allTasks?tasksOwner=team"
-
 
 export const ADDNEWTASK="https://task-management-system-server-lovat.vercel.app/task/add/newTask?assigningType=user"
 
@@ -21,10 +20,11 @@ export const ADDNEWTEAM="https://task-management-system-server-lovat.vercel.app/
 
 export const ADDMEMBER="https://task-management-system-server-lovat.vercel.app/team/send/teamAddRequest"
 
+export const DELETETEAM="https://task-management-system-server-lovat.vercel.app/team/delete/oneTeam"
+
 export const DELETETASK="https://task-management-system-server-lovat.vercel.app/task/delete/oneTask?taskOwner=user"
 
 export const DELETETEAMTASK="https://task-management-system-server-lovat.vercel.app/task/delete/oneTask?taskOwner=team"
-
 
 export const UPDATETASK="https://task-management-system-server-lovat.vercel.app/task/update/oneTask?taskOwner=user"
 
@@ -38,4 +38,8 @@ export const DELNOTIFICATION="https://task-management-system-server-lovat.vercel
 
 export const CONFIRMAITION="https://task-management-system-server-lovat.vercel.app/team/response/teamAddRequest"
 
-export const NOTIFICATIONSSE="https://task-management-system-server-lovat.vercel.app/notification/SSE"
+export const NOTIFICATIONSSE="https://slash-stormy-chamomile.glitch.me/notification/SSE" 
+
+export const TEAMTASKSSSE="https://slash-stormy-chamomile.glitch.me/team/SSE" 
+
+export const UPDATEPROFILE="https://task-management-system-server-lovat.vercel.app/user/update/profile"

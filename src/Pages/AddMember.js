@@ -2,28 +2,36 @@ import React, { useState } from "react";
 import { makeAnyServerRequest } from "../utils/authUtils";
 import { ADDMEMBER } from "../urls";
 
-const AddMember = ({teamID}) => {
-    const [err,setError]=useState('')
+const AddMember = ({ teamID }) => {
+  const [err, setError] = useState("");
   const exitClick = (e) => {
     e.preventDefault();
     const ele = document.querySelector(".mem");
     ele.classList.replace("d-flex", "d-none");
-    setError("")
+    setError("");
   };
 
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
 
+  const [Loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response=await makeAnyServerRequest(ADDMEMBER,"POST",{recipientEmail:email,recipientRole:role,teamID})
-        console.log(response.status)
-        if(response.status==="SUCCESS"){
-            await exitClick(e);
-        }else{
-            console.log(response.response.data.message)
-            setError(response.response.data.message)
-        }
+    setLoading(true);
+    const response = await makeAnyServerRequest(ADDMEMBER, "POST", {
+      recipientEmail: email,
+      recipientRole: role,
+      teamID,
+    });
+    console.log(response.status);
+    if (response.status === "SUCCESS") {
+      exitClick(e);
+    } else {
+      console.log(response.message);
+      setError(response.message);
+    }
+    setLoading(false);
   };
 
   return (
@@ -73,9 +81,8 @@ const AddMember = ({teamID}) => {
           type="submit"
           className="btn btn-success bgBtns text-white fs-5 rounded-pill px-4 d-block ms-auto"
         >
-          Add Member
+          {Loading ? "adding ..." : "Add Member"}
         </button>
-        
       </form>
     </div>
   );
