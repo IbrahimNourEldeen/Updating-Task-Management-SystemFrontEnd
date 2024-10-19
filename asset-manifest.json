@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Updating-Task-Management-SystemFrontEnd/static/css/main.ce971ac5.css",
-    "main.js": "/Updating-Task-Management-SystemFrontEnd/static/js/main.0061dba9.js",
+    "main.js": "/Updating-Task-Management-SystemFrontEnd/static/js/main.320a8b6c.js",
     "static/media/img1.jpg": "/Updating-Task-Management-SystemFrontEnd/static/media/img1.f6c894010cd060283abe.jpg",
     "static/media/About Image.jpg": "/Updating-Task-Management-SystemFrontEnd/static/media/About Image.a36e22b21a9547bc7525.jpg",
     "static/media/TM.png": "/Updating-Task-Management-SystemFrontEnd/static/media/TM.8093c72a8a1dd1a51f6b.png",
     "index.html": "/Updating-Task-Management-SystemFrontEnd/index.html",
     "main.ce971ac5.css.map": "/Updating-Task-Management-SystemFrontEnd/static/css/main.ce971ac5.css.map",
-    "main.0061dba9.js.map": "/Updating-Task-Management-SystemFrontEnd/static/js/main.0061dba9.js.map"
+    "main.320a8b6c.js.map": "/Updating-Task-Management-SystemFrontEnd/static/js/main.320a8b6c.js.map"
   },
   "entrypoints": [
     "static/css/main.ce971ac5.css",
-    "static/js/main.0061dba9.js"
+    "static/js/main.320a8b6c.js"
   ]
 }
