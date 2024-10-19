@@ -115,7 +115,7 @@ const Signup = () => {
     <div>
       <div className="container LSHight">
         <div className="row h-100 justify-content-center align-items-center">
-          <div className="col-12 col-md-8 col-lg-5 p-5 rounded-5 bg-light text-center">
+          <div className="col-12 col-md-8 col-lg-6 p-5 rounded-5 bg-light text-center">
             <h2 className="mb-5 fw-bold">Sign up</h2>
             <form onSubmit={handleSubmit}>
               <input

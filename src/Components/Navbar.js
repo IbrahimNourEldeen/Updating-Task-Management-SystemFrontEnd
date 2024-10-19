@@ -46,7 +46,7 @@ const Navigation = () => {
             {isAuthenticated ? (
               <Nav className="ms-auto">
                 <span className="fs-4 mx-lg-4 position-relative">
-                  <NavLink to="/notification" className="fs-4">
+                  <NavLink to="/notification" className="fs-4 text-end">
                     <i className="fa-regular fa-bell mainColor"></i>
                     { notifications?.length > 0 && (
                       <Badge className="position-absolute top-0 start-100 translate-middle rounded-pill bg-danger" style={{fontSize:"15px",padding:"5px"}}> 

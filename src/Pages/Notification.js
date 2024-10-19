@@ -142,7 +142,7 @@ const Notification = () => {
           notifications.map((notification) => (
             <Col key={notification?._id} md={12} className="mb-3">
               <div className="row shadow py-4">
-                <div className="col-8">
+                <div className="col-12 col-md-8 mb-3">
                   <Card.Title>{notification?.message}</Card.Title>
                 </div>
                 <div className="col text-center">

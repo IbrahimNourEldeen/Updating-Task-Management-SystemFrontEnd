@@ -91,13 +91,13 @@ const Dashboard = () => {
       <CreateTask URL={ADDNEWTASK} />
       <div className="row my-4">
         <h3 className="fw-bold">Tasks</h3>
-        <div className="col">
+        <div className="col-12 col-md-6">
           <span className="fs-6">
             Manage your tasks with ease. Create, assign, and track progress
             efficiently.
           </span>
         </div>
-        <div className="col">
+        <div className="col-12 col-md-6">
           <button
             className="btn btn-success bgBtns text-white fs-5 my-4 my-md-0"
             onClick={() =>
@@ -159,7 +159,7 @@ const Dashboard = () => {
 
       <div className="row mb-5">
         <h3 className="fw-bold mt-5 mb-3">All Tasks</h3>
-        <div className="col-12 col-md-6 col-lg-4">
+        <div className="col-12 col-md-6 col-lg-4 mb-2">
           <input
             className="form-control"
             placeholder="Search Tasks"
@@ -213,7 +213,7 @@ const Dashboard = () => {
       </div>
 
       <div className="row justify-content-evenly show tasks my-4">
-        <div
+        {/* <div
           className="row border p-2 m-0"
           style={{ backgroundColor: "#f7f7f7" }}
         >
@@ -222,25 +222,44 @@ const Dashboard = () => {
           <div className="col text-center">Category</div>
           <div className="col text-center">Priority</div>
           <div className="col text-center">Task Information</div>
-        </div>
+        </div> */}
         {filteredTasks && filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
-            <div className="row p-2 m-0" key={task._id}>
-              <div className="col text-center text-nowrap text-truncate overflow-hidden">
-                {task.title}
+            // <div className="row p-2 m-0" key={task._id}>
+            //   <div className="col text-center text-nowrap text-truncate overflow-hidden">
+            //     {task.title}
+            //   </div>
+            //   <div className="col text-center">{task.status}</div>
+            //   <div className="col text-center">{task.category}</div>
+            //   <div className="col text-center">{task.priority}</div>
+            //   <div className="col text-center">
+            //     <button
+            //       className="btn btn-success fw-bold"
+            //       onClick={() => taskInformation(task._id)}
+            //     >
+            //       Show Task
+            //     </button>
+            //   </div>
+            // </div>
+
+            <div
+                className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
+                style={{ backgroundColor: "#6b71e036" }}
+                key={task._id}
+                id={task._id}
+              >
+                <h5 className="col-12 fw-bold">Title: {task.title}</h5>
+                <div className="col-12 mb-2">Status: {task.status}</div>
+                <div className="col-12 mb-2">Category: {task.category}</div>
+                <div className="col-12 ">
+                  <button
+                    className="btn btn-success fw-bold me-md-4 me-2 mb-2"
+                    onClick={() => taskInformation(task._id)}
+                  >
+                    Show task
+                  </button>
+                </div>
               </div>
-              <div className="col text-center">{task.status}</div>
-              <div className="col text-center">{task.category}</div>
-              <div className="col text-center">{task.priority}</div>
-              <div className="col text-center">
-                <button
-                  className="btn btn-success fw-bold"
-                  onClick={() => taskInformation(task._id)}
-                >
-                  Show Task
-                </button>
-              </div>
-            </div>
           ))
         ) : (
           <p>No tasks available</p>

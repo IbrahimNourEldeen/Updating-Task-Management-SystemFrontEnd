@@ -57,13 +57,13 @@ const MyTeams = () => {
       />
       <div className="row my-4">
         <h3 className="fw-bold">Teams</h3>
-        <div className="col">
+        <div className="col-12 col-md-6">
           <span className="fs-6">
             manage your team with ease. create, assign and track progress
             efficiently.
           </span>
         </div>
-        <div className="col">
+        <div className="col-12 col-md-6">
           <button
             className="btn btn-success bgBtns text-white fs-5 my-4 my-md-0"
             onClick={handleTeam}
@@ -73,20 +73,21 @@ const MyTeams = () => {
         </div>
       </div>
       <h2 className="fw-bold mt-5 mb-4">All Teams</h2>
+      <div className="row">
       {Teams && (Teams.length > 0)
         ? Teams.map((team) => {
             return (
               <div
-                className="row p-3 my-2"
+                className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
                 style={{ backgroundColor: "#6b71e036" }}
                 key={team._id}
                 id={team._id}
               >
                 <h5 className="col-12 fw-bold">{team.name}</h5>
-                <div className="col-12 mb-2">{team.description}</div>
+                <div className="col-12 mb-2 ">{team.description}</div>
                 <div className="col-12">
                   <button
-                    className="btn btn-success fw-bold me-md-4 me-2"
+                    className="btn btn-success fw-bold me-md-4 me-2 mb-2"
                     onClick={() => handleNavigate(team._id)}
                   >
                     Show Team
@@ -102,6 +103,7 @@ const MyTeams = () => {
           })
         : null}
     </div>
+      </div>
   );
 };
 
