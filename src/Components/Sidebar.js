@@ -76,7 +76,7 @@ const Sidebar = () => {
             </div>
           </div>
         </div>
-        <div className="col ViewPort">
+        <div className="col ViewPort p-0">
           <Outlet />
         </div>
       </div>

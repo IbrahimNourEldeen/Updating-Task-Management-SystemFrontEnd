@@ -57,7 +57,7 @@ const MyTeams = () => {
       />
       <div className="row my-4">
         <h3 className="fw-bold">Teams</h3>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6"> 
           <span className="fs-6">
             manage your team with ease. create, assign and track progress
             efficiently.
@@ -73,7 +73,7 @@ const MyTeams = () => {
         </div>
       </div>
       <h2 className="fw-bold mt-5 mb-4">All Teams</h2>
-      <div className="row">
+      <div className="row px-2">
       {Teams && (Teams.length > 0)
         ? Teams.map((team) => {
             return (
@@ -84,10 +84,10 @@ const MyTeams = () => {
                 id={team._id}
               >
                 <h5 className="col-12 fw-bold">{team.name}</h5>
-                <div className="col-12 mb-2 ">{team.description}</div>
+                <div className="col-12 mb-2">{team.description}</div>
                 <div className="col-12">
                   <button
-                    className="btn btn-success fw-bold me-md-4 me-2 mb-2"
+                    className="btn btn-success fw-bold me-md-4 me-2"
                     onClick={() => handleNavigate(team._id)}
                   >
                     Show Team

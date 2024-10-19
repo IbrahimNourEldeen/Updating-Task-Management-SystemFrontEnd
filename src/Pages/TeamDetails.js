@@ -11,7 +11,12 @@ import {
 } from "../urls";
 import { makeAnyServerRequest } from "../utils/authUtils";
 import { useEffect, useState } from "react";
-import { AddTeamTasks, pushTaskToTeam, removeTaskFromTeam, updateteamTask } from "../features/tasks/taskSlice";
+import {
+  AddTeamTasks,
+  pushTaskToTeam,
+  removeTaskFromTeam,
+  updateteamTask,
+} from "../features/tasks/taskSlice";
 
 const TeamDetails = () => {
   const navigate = useNavigate();
@@ -142,7 +147,9 @@ const TeamDetails = () => {
         className="p-2 rounded-3 text-white"
         style={{ backgroundColor: "rgb(107 113 224 / 90%)" }}
       >
-        <h2 className="fw-bold">{Teams.filter((team) => team._id === id)[0]?.name} Team</h2>
+        <h2 className="fw-bold">
+          {Teams.filter((team) => team._id === id)[0]?.name} Team
+        </h2>
         <p className="fs-5 fw-bold ">
           {Teams.filter((team) => team._id === id)[0]?.description}
         </p>
@@ -161,40 +168,19 @@ const TeamDetails = () => {
         </div>
       </div>
 
-      <div className="row my-4">
-        {/* <div
-          className="row border p-2 m-0"
-          style={{ backgroundColor: "#f7f7f7" }}
-        >
-          <div className="col text-center">Member Name</div>
-          <div className="col text-center">Role</div>
-          <div className="col text-center">Delete</div>
-        </div> */}
+      <div className="row my-4 px-3">
         {Members && Members.length > 0 ? (
           Members.map((team) => {
             return (
-              // <div className="row p-2 m-0" id={team.ID._id} key={team.ID._id}>
-              //   <div className="col text-center">{team.ID.fullName}</div>
-              //   <div className="col text-center">{team.role}</div>
-              //   <div className="col text-center">
-              //     <button
-              //       className="btn btn-danger fw-bold"
-              //       onClick={() => {
-              //         handleDeleteUser(team.ID._id);
-              //       }}
-              //     >
-              //       Delete User
-              //     </button>
-              //   </div>
-              // </div>
               <div
                 className="col-12 col-md-6 p-3 my-2 shadow"
-                id={team.ID._id} key={team.ID._id}
+                id={team.ID._id}
+                key={team.ID._id}
               >
                 <h5 className="col-12 fw-bold">{team.ID.fullName}</h5>
                 <div className="col-12 mb-2">{team.role}</div>
                 <div className="col-12 ">
-                <button
+                  <button
                     className="btn btn-danger fw-bold"
                     onClick={() => {
                       handleDeleteUser(team.ID._id);
@@ -225,54 +211,30 @@ const TeamDetails = () => {
         </div>
       </div>
 
-      <div className="row my-4">
-        {/* <div
-          className="row border p-2 m-0"
-          style={{ backgroundColor: "#f7f7f7" }}
-        >
-          <div className="col text-center">Title</div>
-          <div className="col text-center">Status</div>
-          <div className="col text-center">Category</div>
-          <div className="col text-center">Priority</div>
-          <div className="col text-center">Task Information</div>
-        </div> */}
+      <div className="row my-4 px-3">
         {Tasks.length > 0
           ? Tasks.map((task) => {
               return (
-                // <div className="row p-2 m-0" id={task._id} key={task._id}>
-                //   <div className="col text-center text-nowrap text-truncate overflow-hidden">{task.title}</div>
-                //   <div className="col text-center">{task.status}</div>
-                //   <div className="col text-center">{task.category}</div>
-                //   <div className="col text-center">{task.priority}</div>
-                //   <div className="col text-center">
-                //     <button
-                //       className="btn btn-success fw-bold"
-                //       onClick={() => {
-                //         taskInformation(task._id);
-                //       }}
-                //     >
-                //       Show Task
-                //     </button>
-                //   </div>
-                // </div>
                 <div
-                className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
-                style={{ backgroundColor: "#6b71e036" }}
-                key={task._id}
-                id={task._id}
-              >
-                <h5 className="col-12 fw-bold text-nowrap text-truncate overflow-hidden">Title: {task.title}</h5>
-                <div className="col-12 mb-2">Status: {task.status}</div>
-                <div className="col-12 mb-2">Category: {task.category}</div>
-                <div className="col-12 ">
-                  <button
-                    className="btn btn-success fw-bold me-md-4 me-2 mb-2"
-                    onClick={() => taskInformation(task._id)}
-                  >
-                    Show task
-                  </button>
+                  className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
+                  style={{ backgroundColor: "#6b71e036" }}
+                  key={task._id}
+                  id={task._id}
+                >
+                  <h5 className="col-12 fw-bold text-nowrap text-truncate overflow-hidden">
+                    Title: {task.title}
+                  </h5>
+                  <div className="col-12 mb-2">Status: {task.status}</div>
+                  <div className="col-12 mb-2">Category: {task.category}</div>
+                  <div className="col-12 ">
+                    <button
+                      className="btn btn-success fw-bold me-md-4 me-2 mb-2"
+                      onClick={() => taskInformation(task._id)}
+                    >
+                      Show task
+                    </button>
+                  </div>
                 </div>
-              </div>
               );
             })
           : "No Tasks"}

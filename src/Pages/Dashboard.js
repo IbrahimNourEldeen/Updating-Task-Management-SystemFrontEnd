@@ -30,7 +30,7 @@ const Dashboard = () => {
       } catch (error) {
         // console.error("Error fetching tasks:", error);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
     fetchTasks();
@@ -118,8 +118,8 @@ const Dashboard = () => {
           <h6 className="text-secondary fw-bold">Total Tasks</h6>
           <div className="mx-auto" style={{ width: 70, height: 70 }}>
             <CircularProgressbar
-              value={100} 
-              text={`${100}%`} 
+              value={100}
+              text={`${100}%`}
               styles={buildStyles({
                 pathColor: "#3b82f6",
                 textColor: "#3b82f6",
@@ -147,7 +147,7 @@ const Dashboard = () => {
           <div className="mx-auto" style={{ width: 70, height: 70 }}>
             <CircularProgressbar
               value={completedPercentage}
-              text={`${Math.round(completedPercentage)}%`} 
+              text={`${Math.round(completedPercentage)}%`}
               styles={buildStyles({
                 pathColor: "#10b981",
                 textColor: "#10b981",
@@ -170,7 +170,7 @@ const Dashboard = () => {
         </div>
         <div className="col-12 col-md-6">
           <div className="row">
-            <div className="col">
+            <div className="col-6 col-md-4">
               <select
                 className="form-select"
                 onChange={(e) => setCategoryFilter(e.target.value)}
@@ -187,7 +187,7 @@ const Dashboard = () => {
                 <option value="travel">travel</option>
               </select>
             </div>
-            <div className="col">
+            <div className="col-6 col-md-4">
               <select
                 className="form-select"
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -197,7 +197,7 @@ const Dashboard = () => {
                 <option value="completed">Completed</option>
               </select>
             </div>
-            <div className="col">
+            <div className="col-12 col-md-4 mt-2 mt-md-0">
               <select
                 className="form-select"
                 onChange={(e) => setPrioritySort(e.target.value)}
@@ -212,54 +212,27 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="row justify-content-evenly show tasks my-4">
-        {/* <div
-          className="row border p-2 m-0"
-          style={{ backgroundColor: "#f7f7f7" }}
-        >
-          <div className="col text-center">Title</div>
-          <div className="col text-center">Status</div>
-          <div className="col text-center">Category</div>
-          <div className="col text-center">Priority</div>
-          <div className="col text-center">Task Information</div>
-        </div> */}
+      <div className="row justify-content-evenly show tasks my-4 px-3">
         {filteredTasks && filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
-            // <div className="row p-2 m-0" key={task._id}>
-            //   <div className="col text-center text-nowrap text-truncate overflow-hidden">
-            //     {task.title}
-            //   </div>
-            //   <div className="col text-center">{task.status}</div>
-            //   <div className="col text-center">{task.category}</div>
-            //   <div className="col text-center">{task.priority}</div>
-            //   <div className="col text-center">
-            //     <button
-            //       className="btn btn-success fw-bold"
-            //       onClick={() => taskInformation(task._id)}
-            //     >
-            //       Show Task
-            //     </button>
-            //   </div>
-            // </div>
-
             <div
-                className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
-                style={{ backgroundColor: "#6b71e036" }}
-                key={task._id}
-                id={task._id}
-              >
-                <h5 className="col-12 fw-bold">Title: {task.title}</h5>
-                <div className="col-12 mb-2">Status: {task.status}</div>
-                <div className="col-12 mb-2">Category: {task.category}</div>
-                <div className="col-12 ">
-                  <button
-                    className="btn btn-success fw-bold me-md-4 me-2 mb-2"
-                    onClick={() => taskInformation(task._id)}
-                  >
-                    Show task
-                  </button>
-                </div>
+              className="col-12 col-md-6 p-3 my-2 shadow border border-2 rounded-3"
+              style={{ backgroundColor: "#6b71e036" }}
+              key={task._id}
+              id={task._id}
+            >
+              <h5 className="col-12 fw-bold">Title: {task.title}</h5>
+              <div className="col-12 mb-2">Status: {task.status}</div>
+              <div className="col-12 mb-2">Category: {task.category}</div>
+              <div className="col-12 ">
+                <button
+                  className="btn btn-success fw-bold me-md-4 me-2 mb-2"
+                  onClick={() => taskInformation(task._id)}
+                >
+                  Show task
+                </button>
               </div>
+            </div>
           ))
         ) : (
           <p>No tasks available</p>

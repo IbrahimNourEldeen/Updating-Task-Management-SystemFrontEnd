@@ -15,13 +15,11 @@ const CreateTask = ({ URL, teamID }) => {
   const [category, setCategory] = useState("");
   const [comment, setComment] = useState("");
 
-  
   const [errors, setErrors] = useState({});
   const [error, setError] = useState("");
   const [Loading, setLoading] = useState(false);
 
   const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
 
   // Frontend validation
   const validateForm = () => {
@@ -60,7 +58,7 @@ const CreateTask = ({ URL, teamID }) => {
       return;
     }
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await makeAnyServerRequest(URL, "POST", {
         title: taskName,
         dueDate: deadline,
@@ -81,7 +79,7 @@ const CreateTask = ({ URL, teamID }) => {
       } else if (URL === ADDNEWTASKINTEAM) {
         dispatch(pushTaskToTeam(response.data.createdTask));
       }
-      setLoading(false)
+      setLoading(false);
 
       exitClick(e);
     } catch (error) {
@@ -94,7 +92,7 @@ const CreateTask = ({ URL, teamID }) => {
     const ele = document.querySelector(".main");
     ele.classList.replace("d-flex", "d-none");
     setError("");
-    setErrors({})
+    setErrors({});
   };
 
   return (
@@ -103,7 +101,7 @@ const CreateTask = ({ URL, teamID }) => {
       style={{ backgroundColor: "rgba(1,1,1,0.2)" }}
     >
       <form
-        className="col-12 col-md-6 p-5 rounded-2 position-relative"
+        className="col-12 col-md-8 col-lg-6 p-5 rounded-2 position-relative"
         style={{ backgroundColor: "#f7f7f7" }}
         onSubmit={handleSubmit}
       >
@@ -124,82 +122,105 @@ const CreateTask = ({ URL, teamID }) => {
             onChange={(e) => setTaskName(e.target.value)}
           />
         </div>
-        {errors.taskName && <span className="text-danger">{errors.taskName}</span>}
+        {errors.taskName && (
+          <span className="text-danger">{errors.taskName}</span>
+        )}
 
-        <div className="d-flex my-3">
-          <i className="fa-solid fa-stopwatch fs-4"></i>
-          <label htmlFor="DL" className="mx-3">
-            Deadline:
-          </label>
-          <input
-            id="DL"
-            className="form-control w-25"
-            type="datetime-local"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
-          />
+        <div className="my-3">
+          <div className="col-12">
+            <label htmlFor="DL" className="">
+              <i className="fa-solid fa-stopwatch fs-4 me-2"></i>
+              Deadline:
+            </label>
+          </div>
+          <div className="col-12 col-md-6">
+            <input
+              id="DL"
+              className="form-control "
+              type="datetime-local"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+            />
+          </div>
         </div>
-        {errors.deadline && <span className="text-danger">{errors.deadline}</span>}
+        {errors.deadline && (
+          <span className="text-danger">{errors.deadline}</span>
+        )}
 
-        <div className="d-flex">
-          <i className="fa-regular fa-bell fs-4"></i>
-          <label htmlFor="NFs" className="mx-3">
-            Notification:
-          </label>
-          <input
-            id="NFs"
-            type="number"
-            className="form-control"
-            placeholder="Reminder number of units"
-            value={notificationTimes}
-            onChange={(e) => setNotificationTimes(e.target.value)}
-          />
-          <select
-            className="form-select"
-            value={notificationUnite}
-            onChange={(e) => setNotificationUnite(e.target.value)}
-          >
-            <option value="" disabled>
-              Time
-            </option>
-            <option value="minutes">Minutes</option>
-            <option value="hours">Hours</option>
-            <option value="days">Days</option>
-          </select>
+        <div className="row">
+          <div className="col-12">
+            <label htmlFor="NFs">
+              <i className="fa-regular fa-bell fs-4 me-2"></i>
+              Notification:
+            </label>
+          </div>
+          <div className="col-6 col-lg-3">
+            <input
+              id="NFs"
+              type="number"
+              className="form-control"
+              placeholder="Reminder number of units"
+              value={notificationTimes}
+              onChange={(e) => setNotificationTimes(e.target.value)}
+            />
+          </div>
+          <div className="col-6 col-lg-3">
+            <select
+              className="form-select"
+              value={notificationUnite}
+              onChange={(e) => setNotificationUnite(e.target.value)}
+            >
+              <option value="" disabled>
+                Time
+              </option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </select>
+          </div>
         </div>
         {errors.notification && (
           <span className="text-danger">{errors.notification}</span>
         )}
 
-        <div className="d-flex mt-3">
-          <i className="fa-regular fa-flag fs-4"></i>
-          <label htmlFor="pr" className="mx-3">
-            Priority:
-          </label>
-          <select
-            id="pr"
-            className="form-select w-25"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-          >
-            <option value="" disabled>
-              Choose
-            </option>
-            <option value="high">HIGH</option>
-            <option value="medium">MEDIUM</option>
-            <option value="low">LOW</option>
-          </select>
+        <div className="row mt-3">
+          <div className="col-12">
+            <label htmlFor="pr" className="">
+              <i className="fa-regular fa-flag fs-4 me-2"></i>
+              Priority:
+            </label>
+          </div>
+          <div className="col-12 col-md-6">
+            <select
+              id="pr"
+              className="form-select"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+            >
+              <option value="" disabled>
+                Choose
+              </option>
+              <option value="high">HIGH</option>
+              <option value="medium">MEDIUM</option>
+              <option value="low">LOW</option>
+            </select>
+          </div>
         </div>
-        {errors.priority && <span className="text-danger">{errors.priority}</span>}
+        {errors.priority && (
+          <span className="text-danger">{errors.priority}</span>
+        )}
 
-        <div className="d-flex mt-3">
-          <i className="fa-solid fa-layer-group fs-4"></i>
-          <label htmlFor="cgy" className="mx-3">
+        <div className="row mt-3">
+        <div className="col-12">
+        <label htmlFor="cgy" className="">
+          <i className="fa-solid fa-layer-group fs-4 me-2"></i>
             Category:
           </label>
-          <select
+        </div>
+        <div className="col-12 col-md-6">
+        <select
             id="cgy"
-            className="form-select w-25"
+            className="form-select"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -217,7 +238,10 @@ const CreateTask = ({ URL, teamID }) => {
             <option value="travel">TRAVEL</option>
           </select>
         </div>
-        {errors.category && <span className="text-danger">{errors.category}</span>}
+        </div>
+        {errors.category && (
+          <span className="text-danger">{errors.category}</span>
+        )}
 
         <div className="my-3">
           <label htmlFor="cnt" className="fs-3">
@@ -238,7 +262,7 @@ const CreateTask = ({ URL, teamID }) => {
           type="submit"
           className="btn btn-success bgBtns text-white fs-5 rounded-pill px-4 d-block ms-auto"
         >
-          {Loading?"Creating ...":"Create Task"}
+          {Loading ? "Creating ..." : "Create Task"}
         </button>
       </form>
     </div>

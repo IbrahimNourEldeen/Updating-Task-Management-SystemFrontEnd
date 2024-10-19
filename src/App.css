@@ -1,3 +1,4 @@
+
 .main-about-sheet {
   height: 92vh;
   background-image: url(./About\ Image.jpg);
@@ -32,3 +33,7 @@
 
   background-size: cover;
 }
+/* .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+  padding: 0 !important;
+  margin: 0 !important;
+} */
