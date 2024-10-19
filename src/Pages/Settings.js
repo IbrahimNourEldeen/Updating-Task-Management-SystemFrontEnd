@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Settings = () => {
     const { user, refreshToken } = useSelector((state) => state.auth);
     const navigate=useNavigate();
-    console.log(user)
+    // console.log(user)
     const [newFullName, setNewFullName] = useState(user?.fullName);
     const [newUsername, setNewUserName] = useState(user?.username);
     const [oldPassword, setOldPassword] = useState("");
@@ -61,7 +61,7 @@ const Settings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("user",newUsername,"full",newFullName)
+        // console.log("user",newUsername,"full",newFullName)
         if (validateForm()) {
             setErrors({});
             try {
@@ -72,9 +72,9 @@ const Settings = () => {
                     ...(newPassword && { newPassword })
                 });
                 handleLogout()
-                console.log("update", response);
+                // console.log("update", response);
             } catch (error) {
-                console.error("Error updating profile:", error);
+                // console.error("Error updating profile:", error);
             }
         }
     };

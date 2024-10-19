@@ -30,11 +30,11 @@ const CreateTeam = () => {
       description
     });
     if(response.status==="SUCCESS"){
-      console.log(response.data.createdTeam)
+      // console.log(response.data.createdTeam)
       dispatch(pushTeam(response.data.createdTeam))
       exitClick(e)
     }else {
-      console.log(response.message);
+      // console.log(response.message);
       setError(response.message);
     }
     setLoading(false)

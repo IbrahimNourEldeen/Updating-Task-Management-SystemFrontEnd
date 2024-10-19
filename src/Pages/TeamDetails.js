@@ -27,7 +27,7 @@ const TeamDetails = () => {
     Teams.filter((team) => team._id === id)[0]?.members || []
   );
 
-  console.log("tttt", Teams.filter((team) => team._id === id)[0]);
+  // console.log("tttt", Teams.filter((team) => team._id === id)[0]);
 
   const handleMember = () => {
     const ele = document.querySelector(".mem");
@@ -46,9 +46,9 @@ const TeamDetails = () => {
           teamId: id,
         });
         dispatch(AddTeamTasks(tasks.allTasks));
-        console.log("a>>>>>>>>>>>>>>>>>>>>>>>             ", tasks.allTasks);
+        // console.log("a>>>>>>>>>>>>>>>>>>>>>>>             ", tasks.allTasks);
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        // console.error("Error fetching tasks:", error);
       }
     };
     fetchTeamTasks();
@@ -67,7 +67,7 @@ const TeamDetails = () => {
       setLoading(false);
       dispatch(AddTeamTasks(temp));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -82,7 +82,7 @@ const TeamDetails = () => {
       setMembers(temp); // Update the state
       navigate("/my-teams");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -97,16 +97,16 @@ const TeamDetails = () => {
   const accessToken = useSelector((state) => state.auth.accessToken);
 
   useEffect(() => {
-    console.log("use effect", accessToken);
+    // console.log("use effect", accessToken);
     let eventSource = new EventSource(
       `${TEAMTASKSSSE}?accessToken=${accessToken}`
     );
 
     eventSource.addEventListener("insert", (event) => {
-      console.log("insert...............", event.data);
+      // console.log("insert...............", event.data);
       const newTask = JSON.parse(event.data);
       if (newTask.collName === "tasks") {
-        console.log(newTask.collData);
+        // console.log(newTask.collData);
         dispatch(pushTaskToTeam(newTask.collData));
       }
     });
@@ -126,7 +126,7 @@ const TeamDetails = () => {
     });
 
     eventSource.onerror = async (error) => {
-      console.log("error", error);
+      // console.log("error", error);
     };
 
     return () => {

@@ -85,7 +85,7 @@ const CreateTask = ({ URL, teamID }) => {
 
       exitClick(e);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

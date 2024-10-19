@@ -19,7 +19,7 @@ import TaskInformation from "./Pages/TaskInformation";
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Updating-Task-Management-SystemFrontEnd">
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />

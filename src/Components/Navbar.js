@@ -20,10 +20,10 @@ const Navigation = () => {
     const fetchNotifications = async () => {
       try {
         const nots = await makeAnyServerRequest(GETALLNOTIFICATION, "GET");
-        console.log("notif>>>>>      ", nots.data);
+        // console.log("notif>>>>>      ", nots.data);
         dispatch(setNotifications(nots.data))
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        // console.error("Error fetching tasks:", error);
       }
     };
     fetchNotifications();

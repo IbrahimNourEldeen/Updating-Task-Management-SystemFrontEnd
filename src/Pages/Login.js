@@ -78,7 +78,7 @@ const Login = () => {
         dispatch(loginFailure(response.data.data.message));
       }
     } catch (error) {
-      console.log(error.response.data.message);
+      // console.log(error.response.data.message);
       dispatch(loginFailure(error.response.data.message));
     }
   };

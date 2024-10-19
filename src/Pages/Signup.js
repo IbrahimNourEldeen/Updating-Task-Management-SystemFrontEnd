@@ -104,7 +104,7 @@ const Signup = () => {
         dispatch(loginFailure(response.data));
       }
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       if (error.response.data.status === "FAIL") {
         dispatch(loginFailure(error.response.data.message));
       }

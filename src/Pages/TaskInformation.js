@@ -42,9 +42,9 @@ const TaskInformation = () => {
         taskId: id,
       });
       setIsCompleted(true);
-      console.log("update", response);
+      // console.log("update", response);
     } catch (error) {
-      console.error("Error updating task:", error);
+      // console.error("Error updating task:", error);
     }
   };
 
@@ -59,7 +59,7 @@ const TaskInformation = () => {
       dispatch(AddTasks(temp));
       navigate('/dashboard');
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

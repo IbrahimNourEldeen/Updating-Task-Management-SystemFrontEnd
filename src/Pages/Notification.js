@@ -27,10 +27,10 @@ const Notification = () => {
     const fetchNotifications = async () => {
       try {
         const nots = await makeAnyServerRequest(GETALLNOTIFICATION, "GET");
-        console.log("notif>>>>>      ", nots.data);
+        // console.log("notif>>>>>      ", nots.data);
         dispatch(setNotifications(nots.data))
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        // console.error("Error fetching tasks:", error);
       }
     };
     fetchNotifications();
@@ -50,7 +50,7 @@ const Notification = () => {
       });
       dispatch(removeNotification(id));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -62,7 +62,7 @@ const Notification = () => {
       });
       dispatch(removeNotification(id));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -74,7 +74,7 @@ const Notification = () => {
       });
       dispatch(removeNotification(id));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -82,7 +82,7 @@ const Notification = () => {
 
   const accessToken = useSelector((state) => state.auth.accessToken);
   useEffect(() => {
-    console.log("use effect", accessToken);
+    // console.log("use effect", accessToken);
     let eventSource = new EventSource(
       `${NOTIFICATIONSSE}?accessToken=${accessToken}`
     );
@@ -92,9 +92,9 @@ const Notification = () => {
     // };
 
     eventSource.addEventListener("insert", (event) => {
-      console.log("insert...............", event.data);
+      // console.log("insert...............", event.data);
       const newNotification = JSON.parse(event.data);
-      console.log("newNotification ", newNotification.collData);
+      // console.log("newNotification ", newNotification.collData);
       dispatch(addNotification(newNotification.collData));
     });
 
@@ -110,7 +110,7 @@ const Notification = () => {
     });
 
     eventSource.onerror = async (error) => {
-      console.log("error", error);
+      // console.log("error", error);
     };
 
     return () => {

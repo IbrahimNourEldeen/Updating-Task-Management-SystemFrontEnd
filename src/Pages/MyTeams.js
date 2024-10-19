@@ -20,10 +20,10 @@ const MyTeams = () => {
     const fetchTeams = async () => {
       try {
         const teams = await makeAnyServerRequest(GETALLTEAMS, "GET");
-        console.log(teams)
+        // console.log(teams)
         dispatch(AddTeams(teams.data));
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        // console.error("Error fetching tasks:", error);
       }
     };
 
@@ -44,7 +44,7 @@ const MyTeams = () => {
       });
       dispatch(AddTeams(temp));
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 

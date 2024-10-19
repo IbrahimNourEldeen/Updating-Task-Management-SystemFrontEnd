@@ -28,7 +28,7 @@ const Dashboard = () => {
         dispatch(AddTasks(tasks.allTasks));
         setFilteredTasks(tasks.allTasks);
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+        // console.error("Error fetching tasks:", error);
       } finally {
         setLoading(false); 
       }

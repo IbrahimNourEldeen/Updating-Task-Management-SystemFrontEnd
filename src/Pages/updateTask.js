@@ -39,7 +39,7 @@ const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`${URL}`)
+    // console.log(`${URL}`)
     let req;
     if(URL==="UPDATETASK")
       req=UPDATETASK;
@@ -60,10 +60,10 @@ const taskTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
         taskId,
         teamId
       })
-        console.log("update",response)
+        // console.log("update",response)
       exitClick(e)
     }catch(error){
-      console.error("Error updating task:", error);
+      // console.error("Error updating task:", error);
     }
   };
 

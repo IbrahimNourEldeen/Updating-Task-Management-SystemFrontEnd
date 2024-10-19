@@ -3,10 +3,10 @@ import store from "../app/store";
 import { GETALLTEAMS, LOGOUTUSER, NEWACCESSTOKEN } from "../urls";
 
 export const logoutUser = async (refreshToken) => {
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
+  // console.log("hhhhhhhhhhhhhhhhhhhhhhhh");
   try {
     store.dispatch(logout());
-    console.log("Logout successful");
+    // console.log("Logout successful");
     const response =await fetch(LOGOUTUSER, {
       method: "POST",
       headers: {
@@ -22,13 +22,13 @@ export const logoutUser = async (refreshToken) => {
     //   return false;
     // }
   } catch (error) {
-    console.error("Logout failed:", error);
+    // console.error("Logout failed:", error);
     return error;
   }
 };
 
 export const getNewAccessToken = async (refreshToken) => {
-  console.log("heeeeeeeeeeeeeeeeeyyyyyyyyyyy");
+  // console.log("heeeeeeeeeeeeeeeeeyyyyyyyyyyy");
   try {
     const response = await fetch(NEWACCESSTOKEN, {
       method: "POST",
@@ -45,7 +45,7 @@ export const getNewAccessToken = async (refreshToken) => {
       return data.data.accessToken;
     }
   } catch (error) {
-    console.error("Error fetching new access token:", error);
+    // console.error("Error fetching new access token:", error);
   }
 };
 
@@ -82,7 +82,7 @@ export const makeAnyServerRequest = async (
       }
     } else if (response.status === 400) {
       const data = await response.json();
-      console.log("data errorrr", data.message);
+      // console.log("data errorrr", data.message);
       return data;
     }
 
@@ -90,7 +90,7 @@ export const makeAnyServerRequest = async (
     // console.log(data);
     return data;
   } catch (error) {
-    console.error("Error making server request:", error);
+    // console.error("Error making server request:", error);
     return error;
   }
 };

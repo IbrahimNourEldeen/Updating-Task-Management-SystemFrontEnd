@@ -24,11 +24,11 @@ const AddMember = ({ teamID }) => {
       recipientRole: role,
       teamID,
     });
-    console.log(response.status);
+    // console.log(response.status);
     if (response.status === "SUCCESS") {
       exitClick(e);
     } else {
-      console.log(response.message);
+      // console.log(response.message);
       setError(response.message);
     }
     setLoading(false);
