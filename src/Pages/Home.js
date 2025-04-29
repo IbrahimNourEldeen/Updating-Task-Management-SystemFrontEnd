@@ -14,6 +14,9 @@ const Home = () => {
       navigate("/dashboard");
     }
   }, [isAuthenticated, navigate]);
+  const handleClick = () => {
+    navigate('/signup');
+  };
 
   return (
     <>
@@ -30,6 +33,7 @@ const Home = () => {
             <button
               className="btn text-white fs-2 my-5 "
               style={{ backgroundColor: "#6b71e0" }}
+              onClick={handleClick}
             >
               Get Started For Free
             </button>
